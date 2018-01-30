@@ -2,18 +2,21 @@ import React, {Component} from 'react';
 import {Text,TextInput,StyleSheet,View} from 'react-native';
 import {Content, Card, CardItem, Body,Header,Item,Input,Button} from 'native-base';
 
-//import DropDown from '../components/dropdown';
 
 export default class AppBody extends Component {
     constructor(){
         super();
         this.state = {
+            newValue:'',
             textValue:'',
+            receivedValue:'',
+
 
         }
     }
 
     onChangeText(value){
+
         if((value=='A')||(value=='B')||(value=='C')||(value=='D')||(value=='E')||(value=='F')||(value=='G')||(value=='H')||(value=='I')||(value=='J')||(value=='K')||(value=='L')||(value=='M')||(value=='N')||(value=='O')||(value=='P')||(value=='Q')||(value=='R')||(value=='S')||(value=='T')||(value=='U')||(value=='V')||(value=='W')||(value=='X')||(value=='Y')||(value=='Z')){
         this.setState({
         textValue:'LIST ALL THE COURSE PROVIDERS \n WHO ARE THE AVAILABLE COURSE PROVIDERS? \n GIVE ME A LIST OF ALL THE COURSE PROVIDERS \n WHAT COURSES DOES X PROVIDE? \n WHAT COURSES ARE PROVIDED BY X \n HOW LONG IS Y \n WHAT IS THE DURATION OF Y? \n WHAT ARE THE COURSES UNDER Z? \n WHAT ARE THE COURSES FOR Z? \n WHAT COURSES ARE AVAILABLE FOR Z? \n WHO ARE THE INSTRUCTORS OF Y? \n WHO TEACHES Y? \n WHO TAKES Y? \n WHAT IS THE LINK OF Y? \n WHERE CAN I TAKE Y?'
@@ -127,9 +130,39 @@ export default class AppBody extends Component {
             textValue:''
         });
         }
+        this.setState({
+            newValue:value
+        });
     }
 
 
+
+        onSubmit = () =>{
+
+         console.log(this.state.newValue);
+         return fetch('https://app.appointee63.hasura-app.io/query?input='+this.state.newValue)
+         .then(
+            (response)=> {
+            if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' +
+            response.status);
+            return;
+            }
+
+
+
+            // Examine the text in the response
+            response.text().then((data)=>{
+             console.log(data);
+             this.setState({receivedValue:data});
+            });
+            }
+            )
+            .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+            });
+
+        }
 
 
     render() {
@@ -147,8 +180,12 @@ export default class AppBody extends Component {
                placeholder = "  Type your query here"
                placeholderTextColor = "black"
                autoCapitalize = "characters"
-               onChangeText={(value) => this.onChangeText(value)}/>
+               onChangeText={(value) => this.onChangeText(value)}
+               onSubmitEditing={this.onSubmit}/>
         <Text> {this.state.textValue} </Text>
+
+
+
 
                <Text style={{ color: 'orange',fontFamily:'Courier New',
 					 fontWeight:'bold',fontSize:16,paddingTop:50}}>
@@ -156,17 +193,12 @@ export default class AppBody extends Component {
                      </Text>
 
 
-                 <Header searchBar rounded style={{backgroundColor:'orange'}}>
-          <Item>
-
-            <Input placeholder="" />
-
-          </Item>
-          <Button transparent>
-            <Text>Search</Text>
-          </Button>
-        </Header>
-
+                <TextInput style={styles.input2}
+               underlineColorAndroid = "transparent"
+               placeholder={this.state.receivedValue}
+               placeholderTextColor = "black"
+               autoCapitalize = "characters"
+               />
 
         <Text style={{ color: 'black',fontFamily:'Courier New',
 					 fontWeight:'normal',fontSize:16,paddingTop:100}}>
@@ -190,7 +222,17 @@ const styles = StyleSheet.create({
    input: {
       margin: 5,
       height: 50,
+
       borderColor: 'deepskyblue',
+      borderWidth: 5
+
+   },
+
+   input2: {
+      margin: 5,
+      height: 50,
+
+      borderColor: 'orange',
       borderWidth: 5
 
    },
