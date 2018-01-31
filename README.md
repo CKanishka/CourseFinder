@@ -49,6 +49,7 @@ App should get installed and start working on the connected device
 •	After the download is complete install the apk on your android device.
 
 ### GOING INTO THE APP =>
-
+https://github.com/CKanishka/CourseFinder/blob/master/screenshots/1.png
 The app basically has two text boxes,the first one takes the input query and the second one shows the extracted entity. 
+![alt text](https://github.com/CKanishka/CourseFinder/blob/screenshots/1.png "Text Box")
 
