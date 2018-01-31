@@ -50,5 +50,5 @@ App should get installed and start working on the connected device
 
 ### GOING INTO THE APP =>
 The app basically has two text boxes,the first one takes the input query and the second one shows the extracted entity. 
-![alt text](https://github.com/CKanishka/CourseFinder/blob/screenshots/1.png "Text Box")
+![alt text](https://github.com/CKanishka/CourseFinder/blob/screenshots/1.png?raw=true "Text Box")
 
