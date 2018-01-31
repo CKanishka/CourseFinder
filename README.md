@@ -93,3 +93,5 @@ onSubmit = () =>{
 ```
 FOLLOWING IS THE LIST OF ALLOWED INPUTS ALONG WITH THEIR RESULT -
 
+![allowedinputs](https://user-images.githubusercontent.com/30779692/35638866-4fdbeb6a-06de-11e8-9f16-f71e38f84a56.png)
+
