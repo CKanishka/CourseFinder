@@ -50,5 +50,9 @@ App should get installed and start working on the connected device
 
 ### GOING INTO THE APP =>
 The app basically has two text boxes,the first one takes the input query and the second one shows the extracted entity. 
-![alt text](https://imgur.com/a/8K3P8)
+![Screenshot](https://user-images.githubusercontent.com/30779692/35636017-e945a97a-06d5-11e8-851c-e40814601496.png)
+
+When a user types something in the first box it also shows a set of suggestions of the allowed inputs-
+
+
 
