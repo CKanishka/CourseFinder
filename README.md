@@ -54,5 +54,11 @@ The app basically has two text boxes,the first one takes the input query and the
 
 When a user types something in the first box it also shows a set of suggestions of the allowed inputs-
 
+![screenshot_2018-01-31-02-11-38](https://user-images.githubusercontent.com/30779692/35636502-534cea44-06d7-11e8-9f7d-8eec6acd07b2.png)
+
+On submitting the input the app makes a request to the wit.ai api and fetches the result which is shown in the second text box-
+
+
+
 
 
