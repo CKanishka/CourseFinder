@@ -51,3 +51,4 @@ App should get installed and start working on the connected device
 ### GOING INTO THE APP =>
 
 The app basically has two text boxes,the first one takes the input query and the second one shows the extracted entity. 
+
