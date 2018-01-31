@@ -56,9 +56,40 @@ When a user types something in the first box it also shows a set of suggestions 
 
 ![screenshot_2018-01-31-02-11-38](https://user-images.githubusercontent.com/30779692/35636502-534cea44-06d7-11e8-9f7d-8eec6acd07b2.png)
 
-On submitting the input the app makes a request to the wit.ai api and fetches the result which is shown in the second text box-
+On submitting the input the app makes a request to the **wit.ai** api and fetches the result which is shown in the second text box-
+
+![result](https://user-images.githubusercontent.com/30779692/35636664-eb3eeee2-06d7-11e8-8548-2e01fda3dacc.png)
+
+Code that comes into play to send requests and save the received result from the api-
+
+```
+onSubmit = () =>{
+
+         console.log(this.state.newValue);
+         return fetch('https://app.appointee63.hasura-app.io/query?input='+this.state.newValue)
+         .then(
+            (response)=> {
+            if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' +
+            response.status);
+            return;
+            }
 
 
 
+            // Examine the text in the response
+            response.text().then((data)=>{
+             console.log(data);
+             this.setState({receivedValue:data});
+            });
+            }
+            )
+            .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+            });
 
+        }
+
+```
+FOLLOWING IS THE LIST OF ALLOWED INPUTS ALONG WITH THEIR RESULT -
 
