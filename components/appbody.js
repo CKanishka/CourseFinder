@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text,TextInput,StyleSheet,View} from 'react-native';
+import {Text,TextInput,StyleSheet,View,Image} from 'react-native';
 import {Content, Card, CardItem, Body,Header,Item,Input,Button} from 'native-base';
 
 
@@ -9,7 +9,8 @@ export default class AppBody extends Component {
         this.state = {
             newValue:'',
             textValue:'',
-            receivedValue:'',
+            receivedEntity:'',
+            receivedValue:''
 
 
         }
@@ -137,40 +138,36 @@ export default class AppBody extends Component {
 
 
 
-        onSubmit = () =>{
+        onSubmit=()=>{
 
-         console.log(this.state.newValue);
-         return fetch('https://app.appointee63.hasura-app.io/query?input='+this.state.newValue)
-         .then(
-            (response)=> {
-            if (response.status !== 200) {
-            console.log('Looks like there was a problem. Status Code: ' +
-            response.status);
-            return;
-            }
+        console.log(this.state.newValue);
+         return fetch('https://app.flagellum12.hasura-app.io/query?input='+this.state.newValue)
+
+          .then((response) => response.json())
+          .then((data)=>{
+                console.log(data.entity)
+                console.log(data.value)
+                this.setState({receivedEntity:data.entity});
+                this.setState({receivedValue:data.value});
+            })
+          .catch((error) => {
+        console.error(error);
+           });
 
 
-
-            // Examine the text in the response
-            response.text().then((data)=>{
-             console.log(data);
-             this.setState({receivedValue:data});
-            });
-            }
-            )
-            .catch(function(err) {
-            console.log('Fetch Error :-S', err);
-            });
 
         }
+
 
 
     render() {
         return (
             <Content>
 
+       <Image source={require('../img/b5new.jpg')} style={styles.backgroundImage}>
+        </Image>
         <Text style={{ color: 'deepskyblue',fontFamily:'Courier New',
-					 fontWeight:'bold',fontSize:16,paddingTop:5}}>
+					 fontWeight:'bold',fontSize:16,paddingTop:5,paddingLeft:20}}>
                                 The search for your desired starts here-
                      </Text>
 
@@ -182,14 +179,27 @@ export default class AppBody extends Component {
                autoCapitalize = "characters"
                onChangeText={(value) => this.onChangeText(value)}
                onSubmitEditing={this.onSubmit}/>
-        <Text> {this.state.textValue} </Text>
+        <Text style={{paddingLeft:20}}> {this.state.textValue} </Text>
 
 
 
 
                <Text style={{ color: 'orange',fontFamily:'Courier New',
-					 fontWeight:'bold',fontSize:16,paddingTop:50}}>
+					 fontWeight:'bold',fontSize:16,paddingTop:50,paddingLeft:20}}>
                                 The extracted entity is-
+                     </Text>
+
+
+                <TextInput style={styles.input2}
+               underlineColorAndroid = "transparent"
+               placeholder={this.state.receivedEntity}
+               placeholderTextColor = "black"
+               autoCapitalize = "characters"
+               />
+
+                <Text style={{ color: 'orange',fontFamily:'Courier New',
+					 fontWeight:'bold',fontSize:16,paddingTop:10,paddingLeft:20}}>
+                                The value is-
                      </Text>
 
 
@@ -200,12 +210,18 @@ export default class AppBody extends Component {
                autoCapitalize = "characters"
                />
 
+
+
         <Text style={{ color: 'black',fontFamily:'Courier New',
-					 fontWeight:'normal',fontSize:16,paddingTop:100}}>
+					 fontWeight:'bold',fontSize:16,paddingTop:25,paddingLeft:20}}>
                                 *****NOTE***** </Text>
-        <Text>X-Course Provider </Text>
-        <Text> Y-Course   </Text>
-        <Text>Z-Domain of Courses </Text>
+        <Text style={{
+					 fontWeight:'bold',paddingLeft:20}}>X-Course Provider </Text>
+        <Text style={{
+					 fontWeight:'bold',paddingLeft:20}}> Y-Course   </Text>
+        <Text style={{
+					 fontWeight:'bold',paddingLeft:20}}>Z-Domain of Courses </Text>
+
 
 
             </Content>
@@ -217,7 +233,7 @@ export default class AppBody extends Component {
 module.export = AppBody;
 const styles = StyleSheet.create({
    container: {
-      paddingTop: 23
+     paddingTop:23
    },
    input: {
       margin: 5,
@@ -244,5 +260,16 @@ const styles = StyleSheet.create({
    },
    submitButtonText:{
       color: 'white'
-   }
+   },
+    backgroundImage: {
+
+        position: 'absolute',
+        top:0,
+        left:0,
+        width: '100%',
+        height: '100%',
+        resizeMode: 'stretch',
+
+
+  }
 })
