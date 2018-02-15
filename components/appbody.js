@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Text,TextInput,StyleSheet,View,Image} from 'react-native';
-import {Content, Card, CardItem, Body,Header,Item,Input,Button} from 'native-base';
+import {Content, Card, CardItem, Body,Header,Item,Input,Button,Bottom} from 'native-base';
 
 
 export default class AppBody extends Component {
@@ -141,7 +141,7 @@ export default class AppBody extends Component {
         onSubmit=()=>{
 
         console.log(this.state.newValue);
-         return fetch('https://app.flagellum12.hasura-app.io/query?input='+this.state.newValue)
+         return fetch('https://app.brashly30.hasura-app.io/query?input='+this.state.newValue)
 
           .then((response) => response.json())
           .then((data)=>{
@@ -218,10 +218,9 @@ export default class AppBody extends Component {
         <Text style={{
 					 fontWeight:'bold',paddingLeft:20}}>X-Course Provider </Text>
         <Text style={{
-					 fontWeight:'bold',paddingLeft:20}}> Y-Course   </Text>
+					 fontWeight:'bold',paddingLeft:20}}>Y-Course   </Text>
         <Text style={{
-					 fontWeight:'bold',paddingLeft:20}}>Z-Domain of Courses </Text>
-
+					 fontWeight:'bold',paddingLeft:20,paddingBottom:300}}>Z-Domain of Courses </Text>
 
 
             </Content>
@@ -257,6 +256,15 @@ const styles = StyleSheet.create({
 
       margin: 15,
       height: 100,
+   },
+   vs: {
+
+     flex:1,
+     flexWrap:'wrap',
+     justifyContent: 'center',
+    alignItems: 'center',
+      backgroundColor: 'red',
+
    },
    submitButtonText:{
       color: 'white'
